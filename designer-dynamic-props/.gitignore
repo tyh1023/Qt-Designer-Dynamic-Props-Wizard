@@ -1,0 +1,75 @@
+# ---------------------------------------------------------------------
+# Qt Creator user settings
+# ---------------------------------------------------------------------
+*.user
+*.user.*
+CMakeLists.txt.user
+CMakeLists.txt.user.*
+.qmake.stash
+
+# ---------------------------------------------------------------------
+# Build artifacts
+# ---------------------------------------------------------------------
+build/
+build-*/
+debug/
+release/
+*.o
+*.obj
+*.so
+*.dylib
+*.dll
+*.lib
+*.a
+*.exe
+*.pdb
+*.ilk
+*.exp
+*.idb
+*.tlog
+*.log
+
+# Qt generated
+moc_*.cpp
+moc_*.h
+qrc_*.cpp
+ui_*.h
+*.moc
+
+# CMake generated
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+*.cmake
+!CMakeLists.txt
+
+# ---------------------------------------------------------------------
+# IDE / Editor
+# ---------------------------------------------------------------------
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.cproject
+.settings/
+
+# ---------------------------------------------------------------------
+# OS
+# ---------------------------------------------------------------------
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# ---------------------------------------------------------------------
+# Temporary / local test
+# ---------------------------------------------------------------------
+tmp/
+temp/
+*.bak
+designer-dynamic-props.bak/
