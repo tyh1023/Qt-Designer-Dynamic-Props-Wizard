@@ -1,0 +1,11 @@
+# Top-level project file.
+# Build order: widget library first, then the Designer plugin.
+
+TEMPLATE = subdirs
+CONFIG  += ordered
+
+SUBDIRS = \
+    %ProjectName% \
+    %ProjectName%Plugin
+
+%ProjectName%Plugin.depends = %ProjectName%

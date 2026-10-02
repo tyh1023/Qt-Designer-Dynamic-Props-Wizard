@@ -1,0 +1,18 @@
+qt_add_library(%{ProjectName} STATIC
+    %{WidgetClassName}.cpp
+    %{WidgetClassName}.h
+    lib/designerdynamicproperties.h
+    lib/designerpropertypolicy.h
+    lib/designerpropertypolicy.cpp
+)
+
+target_include_directories(%{ProjectName} PUBLIC
+    ${CMAKE_CURRENT_SOURCE_DIR}
+    ${CMAKE_CURRENT_SOURCE_DIR}/lib
+)
+
+target_link_libraries(%{ProjectName} PUBLIC
+    Qt6::Core
+    Qt6::Gui
+    Qt6::Widgets
+)

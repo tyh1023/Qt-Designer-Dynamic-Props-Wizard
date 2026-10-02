@@ -1,0 +1,42 @@
+# Designer plugin library.
+
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Designer)
+
+add_library(%{ProjectName}Plugin MODULE
+    %{WidgetClassName}Plugin.cpp
+    %{WidgetClassName}Plugin.h
+    dynamicpropertysheetwrapper.cpp
+    dynamicpropertysheetwrapper.h
+    dynamicpropertysheetwrapperfactory.cpp
+    dynamicpropertysheetwrapperfactory.h
+)
+
+target_include_directories(%{ProjectName}Plugin PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}
+    ${CMAKE_SOURCE_DIR}/%{ProjectName}
+    ${CMAKE_SOURCE_DIR}/%{ProjectName}/lib
+)
+
+target_link_libraries(%{ProjectName}Plugin PRIVATE
+    %{ProjectName}
+    Qt${QT_VERSION_MAJOR}::Core
+    Qt${QT_VERSION_MAJOR}::Gui
+    Qt${QT_VERSION_MAJOR}::Widgets
+    Qt${QT_VERSION_MAJOR}::Designer
+)
+
+set_target_properties(%{ProjectName}Plugin PROPERTIES
+    LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
+
+# Locate Designer plugin install directory.
+get_target_property(_qt_core_location Qt${QT_VERSION_MAJOR}::Core LOCATION)
+get_filename_component(_qt_bin_dir "${_qt_core_location}" DIRECTORY)
+set(_designer_plugin_dir "${_qt_bin_dir}/../plugins/designer"
+    CACHE PATH "Qt Designer plugin install directory")
+
+install(TARGETS %{ProjectName}Plugin
+    LIBRARY DESTINATION "${_designer_plugin_dir}"
+    RUNTIME DESTINATION "${_designer_plugin_dir}"
+)

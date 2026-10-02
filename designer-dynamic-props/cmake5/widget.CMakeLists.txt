@@ -1,0 +1,26 @@
+# Static widget library. No Designer dependency.
+
+add_library(%{ProjectName} STATIC
+    %{WidgetClassName}.cpp
+    %{WidgetClassName}.h
+    lib/designerdynamicproperties.h
+    lib/designerpropertypolicy.h
+    lib/designerpropertypolicy.cpp
+)
+
+target_include_directories(%{ProjectName} PUBLIC
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/lib>
+)
+
+target_link_libraries(%{ProjectName} PUBLIC
+    Qt${QT_VERSION_MAJOR}::Core
+    Qt${QT_VERSION_MAJOR}::Gui
+    Qt${QT_VERSION_MAJOR}::Widgets
+)
+
+set_target_properties(%{ProjectName} PROPERTIES
+    ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+    LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)

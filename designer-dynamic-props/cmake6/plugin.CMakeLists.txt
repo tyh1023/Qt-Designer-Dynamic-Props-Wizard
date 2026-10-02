@@ -1,0 +1,25 @@
+qt_add_plugin(%{ProjectName}Plugin
+    CLASS_NAME %{WidgetClassName}Plugin
+    %{WidgetClassName}Plugin.cpp
+    %{WidgetClassName}Plugin.h
+    dynamicpropertysheetwrapper.cpp
+    dynamicpropertysheetwrapper.h
+    dynamicpropertysheetwrapperfactory.cpp
+    dynamicpropertysheetwrapperfactory.h
+)
+
+target_include_directories(%{ProjectName}Plugin PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}
+    ${CMAKE_SOURCE_DIR}/%{ProjectName}
+    ${CMAKE_SOURCE_DIR}/%{ProjectName}/lib
+)
+
+target_link_libraries(%{ProjectName}Plugin PRIVATE
+    %{ProjectName}
+    Qt6::Designer
+)
+
+install(TARGETS %{ProjectName}Plugin
+    LIBRARY DESTINATION "${QT6_INSTALL_PLUGINS}/designer"
+    RUNTIME DESTINATION "${QT6_INSTALL_PLUGINS}/designer"
+)

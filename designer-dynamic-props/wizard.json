@@ -1,0 +1,302 @@
+{
+    "version": 1,
+    "supportedProjectTypes": [
+        "CMakeProjectManager.CMakeProject",
+        "Qt4ProjectManager.Qt4Project"
+    ],
+    "id": "Z.DesignerDynamicPropsWidget",
+    "icon": "designerdynamicprops.png",
+    "category": "H.Project",
+    "trDescription": {
+        "C": "Creates a custom widget that uses dynamic property rules, with a widget library and a Qt Designer plugin library.",
+        "zh_CN": "生成一个使用动态属性规则的自定义控件，包含控件库与 Qt Designer 插件库。"
+    },
+    "trDisplayName": {
+        "C": "Qt 4 Designer Custom Widget with Dynamic Props",
+        "zh_CN": "Qt 4 设计师自定义动态属性控件"
+    },
+    "trDisplayCategory": {
+        "C": "Qt 4 Designer Custom Widget",
+        "zh_CN": "Qt 4 设计师自定义控件"
+    },
+    "iconKind": "Themed",
+    "featuresRequired": [ "QtSupport.Wizards.FeatureQt" ],
+    "enabled": "%{JS: isAnyPluginRunning(['qmakeprojectmanager', 'cmakeprojectmanager'])}",
+
+    "options":
+    [
+        {
+            "key": "ProjectFile",
+            "value": "%{JS: value(\\{qmake: 'ProFile', cmake: 'CMakeFile', 'cmake-qt6': 'CMakeFile'\\}[value('BuildSystem')])}"
+        },
+        { "key": "ProFile",      "value": "%{JS: Util.fileName(value('ProjectDirectory') + '/' + value('ProjectName') + 'All', 'pro')}" },
+        { "key": "CMakeFile",    "value": "%{ProjectDirectory}/CMakeLists.txt" },
+        { "key": "WidgetHeader", "value": "%{WidgetClassName}.h" },
+        { "key": "WidgetSource", "value": "%{WidgetClassName}.cpp" }
+    ],
+
+    "pages":
+    [
+        {
+            "trDisplayName": {
+                "C": "Project Location",
+                "zh_CN": "项目位置"
+            },
+            "trShortTitle": {
+                "C": "Location",
+                "zh_CN": "位置"
+            },
+            "typeId": "Project",
+            "data": {
+                "trDescription": {
+                    "C": "This wizard generates a custom widget project with dynamic property rules, containing a widget library and a Qt Designer plugin library.",
+                    "zh_CN": "此向导将生成一个使用动态属性规则的自定义控件工程，包含控件库与 Qt Designer 插件库。"
+                }
+            }
+        },
+        {
+            "trDisplayName": {
+                "C": "Build System",
+                "zh_CN": "构建系统"
+            },
+            "trShortTitle": {
+                "C": "Build System",
+                "zh_CN": "构建系统"
+            },
+            "typeId": "Fields",
+            "skipForSubprojects": true,
+            "data":
+            [
+                {
+                    "name": "BuildSystem",
+                    "trDisplayName": {
+                        "C": "Build system:",
+                        "zh_CN": "构建系统："
+                    },
+                    "type": "ComboBox",
+                    "persistenceKey": "BuildSystemType",
+                    "data":
+                    {
+                        "index": 0,
+                        "items":
+                        [
+                            {
+                                "trKey": {
+                                    "C": "qmake",
+                                    "zh_CN": "qmake"
+                                },
+                                "value": "qmake",
+                                "condition": "%{JS: isPluginRunning('qmakeprojectmanager')}"
+                            },
+                            {
+                                "trKey": {
+                                    "C": "CMake with Qt 5 Compatibility",
+                                    "zh_CN": "CMake（兼容 Qt 5）"
+                                },
+                                "value": "cmake",
+                                "condition": "%{JS: isPluginRunning('cmakeprojectmanager')}"
+                            },
+                            {
+                                "trKey": {
+                                    "C": "CMake",
+                                    "zh_CN": "CMake"
+                                },
+                                "value": "cmake-qt6",
+                                "condition": "%{JS: isPluginRunning('cmakeprojectmanager')}"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "trDisplayName": {
+                "C": "Widget Details",
+                "zh_CN": "控件信息"
+            },
+            "trShortTitle": {
+                "C": "Details",
+                "zh_CN": "详细信息"
+            },
+            "typeId": "Fields",
+            "data":
+            [
+                {
+                    "name": "DetailsPageDescription",
+                    "type": "Label",
+                    "data":
+                    {
+                        "trText": {
+                            "C": "Specify the class name and Qt Designer display information for the custom widget.",
+                            "zh_CN": "指定自定义控件的类名和 Qt Designer 中显示的信息。"
+                        },
+                        "wordWrap": true
+                    }
+                },
+                { "name": "Sp0", "type": "Spacer" },
+                {
+                    "name": "WidgetClassName",
+                    "trDisplayName": {
+                        "C": "Widget class name:",
+                        "zh_CN": "控件类名："
+                    },
+                    "mandatory": true,
+                    "type": "LineEdit",
+                    "data":
+                    {
+                        "validator": "^[a-zA-Z_][a-zA-Z_0-9]*$",
+                        "text": "MyWidget"
+                    }
+                },
+                {
+                    "name": "WidgetBaseClass",
+                    "trDisplayName": {
+                        "C": "Base class:",
+                        "zh_CN": "控件基类："
+                    },
+                    "type": "ComboBox",
+                    "data":
+                    {
+                        "items": [
+                            "QWidget",
+                            "QFrame",
+                            "QAbstractButton",
+                            "QPushButton",
+                            "QLabel"
+                        ]
+                    }
+                },
+                {
+                    "name": "WidgetGroup",
+                    "trDisplayName": {
+                        "C": "Designer group:",
+                        "zh_CN": "Designer 分组："
+                    },
+                    "type": "LineEdit",
+                    "data": { "text": "Custom" }
+                },
+                {
+                    "name": "WidgetDisplayName",
+                    "trDisplayName": {
+                        "C": "Display name:",
+                        "zh_CN": "显示名："
+                    },
+                    "type": "LineEdit",
+                    "data": { "text": "My Widget" }
+                }
+            ]
+        },
+        {
+            "trDisplayName": {
+                "C": "Kit Selection",
+                "zh_CN": "套件选择"
+            },
+            "trShortTitle": {
+                "C": "Kits",
+                "zh_CN": "套件"
+            },
+            "typeId": "Kits",
+            "data": {
+                "projectFilePath": "%{ProjectFile}",
+                "requiredFeatures": [ "QtSupport.Wizards.FeatureQt" ]
+            }
+        },
+        {
+            "trDisplayName": {
+                "C": "Project Management",
+                "zh_CN": "项目管理"
+            },
+            "trShortTitle": {
+                "C": "Summary",
+                "zh_CN": "摘要"
+            },
+            "typeId": "Summary"
+        }
+    ],
+
+    "generators":
+    [
+        {
+            "typeId": "File",
+            "data":
+            [
+                { "source": "widget/widget.h",   "target": "%{ProjectName}/%{WidgetHeader}" },
+                { "source": "widget/widget.cpp", "target": "%{ProjectName}/%{WidgetSource}" },
+                {
+                    "source": "plugin/plugin.h",
+                    "target": "%{ProjectName}Plugin/%{WidgetClassName}Plugin.h"
+                },
+                {
+                    "source": "plugin/plugin.cpp",
+                    "target": "%{ProjectName}Plugin/%{WidgetClassName}Plugin.cpp",
+                    "openInEditor": true
+                },
+
+                { "source": "lib/designerdynamicproperties.h", "target": "%{ProjectName}/lib/designerdynamicproperties.h" },
+                { "source": "lib/designerpropertypolicy.h",    "target": "%{ProjectName}/lib/designerpropertypolicy.h" },
+                { "source": "lib/designerpropertypolicy.cpp",  "target": "%{ProjectName}/lib/designerpropertypolicy.cpp" },
+
+                { "source": "lib/dynamicpropertysheetwrapper.h",          "target": "%{ProjectName}Plugin/dynamicpropertysheetwrapper.h" },
+                { "source": "lib/dynamicpropertysheetwrapper.cpp",        "target": "%{ProjectName}Plugin/dynamicpropertysheetwrapper.cpp" },
+                { "source": "lib/dynamicpropertysheetwrapperfactory.h",   "target": "%{ProjectName}Plugin/dynamicpropertysheetwrapperfactory.h" },
+                { "source": "lib/dynamicpropertysheetwrapperfactory.cpp", "target": "%{ProjectName}Plugin/dynamicpropertysheetwrapperfactory.cpp" },
+
+                {
+                    "source": "qmake/all.pro",
+                    "target": "%{ProFile}",
+                    "openAsProject": true,
+                    "condition": "%{JS: value('BuildSystem') === 'qmake'}"
+                },
+                {
+                    "source": "qmake/widget.pro",
+                    "target": "%{ProjectName}/%{ProjectName}.pro",
+                    "condition": "%{JS: value('BuildSystem') === 'qmake'}"
+                },
+                {
+                    "source": "qmake/plugin.pro",
+                    "target": "%{ProjectName}Plugin/%{ProjectName}Plugin.pro",
+                    "condition": "%{JS: value('BuildSystem') === 'qmake'}"
+                },
+                {
+                    "source": "qmake/common.pri",
+                    "target": "common.pri",
+                    "condition": "%{JS: value('BuildSystem') === 'qmake'}"
+                },
+
+                {
+                    "source": "cmake5/root.CMakeLists.txt",
+                    "target": "CMakeLists.txt",
+                    "openAsProject": true,
+                    "condition": "%{JS: value('BuildSystem') === 'cmake'}"
+                },
+                {
+                    "source": "cmake5/widget.CMakeLists.txt",
+                    "target": "%{ProjectName}/CMakeLists.txt",
+                    "condition": "%{JS: value('BuildSystem') === 'cmake'}"
+                },
+                {
+                    "source": "cmake5/plugin.CMakeLists.txt",
+                    "target": "%{ProjectName}Plugin/CMakeLists.txt",
+                    "condition": "%{JS: value('BuildSystem') === 'cmake'}"
+                },
+
+                {
+                    "source": "cmake6/root.CMakeLists.txt",
+                    "target": "CMakeLists.txt",
+                    "openAsProject": true,
+                    "condition": "%{JS: value('BuildSystem') === 'cmake-qt6'}"
+                },
+                {
+                    "source": "cmake6/widget.CMakeLists.txt",
+                    "target": "%{ProjectName}/CMakeLists.txt",
+                    "condition": "%{JS: value('BuildSystem') === 'cmake-qt6'}"
+                },
+                {
+                    "source": "cmake6/plugin.CMakeLists.txt",
+                    "target": "%{ProjectName}Plugin/CMakeLists.txt",
+                    "condition": "%{JS: value('BuildSystem') === 'cmake-qt6'}"
+                }
+            ]
+        }
+    ]
+}
