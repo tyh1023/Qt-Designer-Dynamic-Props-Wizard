@@ -31,8 +31,9 @@
         },
         { "key": "ProFile",      "value": "%{JS: Util.fileName(value('ProjectDirectory') + '/' + value('ProjectName') + 'All', 'pro')}" },
         { "key": "CMakeFile",    "value": "%{ProjectDirectory}/CMakeLists.txt" },
-        { "key": "WidgetHeader", "value": "%{WidgetClassName}.h" },
-        { "key": "WidgetSource", "value": "%{WidgetClassName}.cpp" }
+        { "key": "WidgetFileName", "value": "%{JS: value('WidgetClassName').toLowerCase()}" },
+        { "key": "WidgetHeader", "value": "%{WidgetFileName}.h" },
+        { "key": "WidgetSource", "value": "%{WidgetFileName}.cpp" }
     ],
 
     "pages":
@@ -224,11 +225,11 @@
                 { "source": "widget/widget.cpp", "target": "%{ProjectName}/%{WidgetSource}" },
                 {
                     "source": "plugin/plugin.h",
-                    "target": "%{ProjectName}Plugin/%{WidgetClassName}Plugin.h"
+                    "target": "%{ProjectName}Plugin/%{WidgetFileName}plugin.h"
                 },
                 {
                     "source": "plugin/plugin.cpp",
-                    "target": "%{ProjectName}Plugin/%{WidgetClassName}Plugin.cpp",
+                    "target": "%{ProjectName}Plugin/%{WidgetFileName}plugin.cpp",
                     "openInEditor": true
                 },
 

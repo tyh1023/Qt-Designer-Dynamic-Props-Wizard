@@ -1,4 +1,4 @@
-#include "%{WidgetClassName}.h"
+#include "%{WidgetFileName}.h"
 #include "designerpropertypolicy.h"
 
 %{WidgetClassName}::%{WidgetClassName}(%{WidgetBaseClass} *parent)

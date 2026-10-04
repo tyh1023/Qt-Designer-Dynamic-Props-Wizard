@@ -1,5 +1,5 @@
-#include "%{WidgetClassName}Plugin.h"
-#include "%{WidgetClassName}.h"
+#include "%{WidgetFileName}plugin.h"
+#include "%{WidgetFileName}.h"
 #include "dynamicpropertysheetwrapperfactory.h"
 
 #include <QtDesigner/QDesignerFormEditorInterface>

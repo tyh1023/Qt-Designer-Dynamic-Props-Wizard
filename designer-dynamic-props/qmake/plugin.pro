@@ -8,6 +8,13 @@ CONFIG += no_debug_suffix
 
 TARGET = %{ProjectName}Plugin
 
+profile_build {
+    QMAKE_CXXFLAGS += -g
+    # Ensure that debugging information is generated
+    QMAKE_LFLAGS += -g
+    # Other Profile Specific Settings
+}
+
 QT += designer widgets uiplugin
 
 CONFIG += utf8_source
