@@ -9,13 +9,6 @@ CONFIG += no_debug_suffix
 
 TARGET = %{ProjectName}$${COMMON_TARGET_SUFFIX}
 
-profile_build {
-    QMAKE_CXXFLAGS += -g
-    # Ensure that debugging information is generated
-    QMAKE_LFLAGS += -g
-    # Other Profile Specific Settings
-}
-
 QT += widgets
 
 CONFIG += utf8_source
