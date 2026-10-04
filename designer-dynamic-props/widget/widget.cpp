@@ -9,10 +9,16 @@
     // Register your dynamic property rules here.
     // See example/ExampleWidget.cpp for a working sample.
 
+    auto connectRuleTrigger = [this](auto signal, const char *propName) {
+        connect(this, signal, m_policy, [this, propName]{
+            m_policy->reevaluate(QString::fromLatin1(propName));
+        });
+    };
+
     // Whenever a property that a rule depends on changes, notify the policy:
     //
-    //   connect(this, &%{WidgetClassName}::somePropertyChanged,
-    //           m_policy, &DesignerPropertyPolicy::reevaluate);
+    //   connectRuleTrigger(&%{WidgetClassName}::somePropertyChanged,
+    //          "someProperty");
 }
 
 // --- QDesignerDynamicProperties forwarding ---

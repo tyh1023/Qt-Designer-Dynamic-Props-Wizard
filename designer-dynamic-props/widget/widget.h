@@ -6,7 +6,6 @@
 // property editor can show / hide / enable / disable properties at runtime.
 //
 // This library is built as a static library. No export macro is needed.
-// See README.md for how to switch to a shared library.
 
 #include <%{WidgetBaseClass}>
 #include "designerdynamicproperties.h"
