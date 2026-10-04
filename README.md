@@ -143,8 +143,8 @@ m_policy->setVisibilityRule(
 **Step 3** — Notify the policy when a dependency changes:
 
 ```cpp
-connect(this, &MyWidget::enableAdvancedChanged,
-        m_policy, &DesignerPropertyPolicy::reevaluate);
+connectRuleTrigger(&MyWidget::enableAdvancedChanged,
+        "enableAdvanced");
 ```
 
 **Rule types available**:
@@ -338,8 +338,8 @@ m_policy->setVisibilityRule(
 **第 3 步** — 依赖属性变化时通知 policy：
 
 ```cpp
-connect(this, &MyWidget::enableAdvancedChanged,
-        m_policy, &DesignerPropertyPolicy::reevaluate);
+connectRuleTrigger(&MyWidget::enableAdvancedChanged,
+        "enableAdvanced");
 ```
 
 **可用的规则类型**：
